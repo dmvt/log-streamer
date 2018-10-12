@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Log Streamer</title>
+    <style>
+      * { font-family:tahoma; font-size:12px; line-height:14px; padding:0px;margin:0px;}
+      p { margin-bottom: 4px; }
+      div { width:500px; margin-left:auto; margin-right:auto;}
+      #content { padding:5px; background:#ddd; border-radius:5px;
+          overflow-y: scroll; border:1px solid #CCC;
+          margin-top:5px; height: 800px; width: 95%; }
+      #status { width:88px;display:block;float:left;margin-top:15px; }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      $(function () {
+        // if user is running mozilla then use it's built-in WebSocket
+        window.WebSocket = window.WebSocket || window.MozWebSocket;
+
+        var parts = window.location.origin.split(':');
+        var loc = 'ws:' + parts[1] + ':3999';
+        var connection;
+
+        function connect() {
+          connection = new WebSocket(loc);
+
+          connection.onopen = function () {
+            $('#status').text('Connected');
+          };
+
+          connection.onclose = function () {
+            $('#content').prepend('<p>---------</p>');
+            $('#status').text('Disconnected... reconnecting in 2 seconds');
+            setTimeout(function () {
+              $('#status').text('Connecting...');
+              connect();
+            }, 2000);
+          }
+
+          connection.onerror = function (error) {
+            console.warn('SOCKET ERRROR');
+            console.error(error);
+          };
+
+          connection.onmessage = function (payload) {
+            console.warn(payload.data);
+            $.each(payload.data.split('\n'), function (i, line) {
+              if (line) {
+                line = line.trim();
+              }
+              if (line.length > 0) {
+                $('#content').prepend('<p>' + line + '</p>');
+              }
+            });
+          };
+        }
+
+        connect();
+      });
+    </script>
+  </head>
+  <body>
+    <div>
+      <span id="status">Connecting...</span>
+    </div>
+    <div id="content"></div>
+  </body>
+</html>

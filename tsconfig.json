@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "moduleResolution": "node",
+    "outDir": "./src",
+    "target": "ES2017"
+  },
+  "include": [
+    "./lib/**/*"
+  ]
+}

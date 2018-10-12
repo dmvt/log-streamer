@@ -1,0 +1,42 @@
+{
+  "name": "log-streamer",
+  "version": "0.0.1",
+  "description": "A very simple server to stream a log file over websocket.",
+  "main": "lib/app.ts",
+  "scripts": {
+    "lint": "npm run lint:logger && npm run lint:lib",
+    "lint:lib": "tslint -c tslint.json -e 'lib/**/logger.ts' 'lib/**/*.ts'",
+    "lint:logger": "tslint -c tslint-logger.json 'lib/**/logger.ts'",
+    "setup": "npm run lint",
+    "start": "npm run setup && ts-node lib/app.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arkoar-group/log-streamer.git"
+  },
+  "engines": {
+    "node": "^8.11.2"
+  },
+  "keywords": [],
+  "author": "Dan Matthews <dmvt@pm.me>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/arkoar-group/log-streamer"
+  },
+  "homepage": "https://github.com/arkoar-group/log-streamer#readme",
+  "devDependencies": {
+    "@types/bintrees": "^1.0.2",
+    "@types/lodash-es": "^4.17.1",
+    "@types/node": "^10.5.3",
+    "@types/websocket": "0.0.40",
+    "ts-node": "^7.0.0",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.14.0",
+    "tslint-config-standard": "^7.1.0",
+    "typescript": "^2.9.2"
+  },
+  "dependencies": {
+    "lodash-es": "^4.17.10",
+    "websocket": "^1.0.28"
+  }
+}
