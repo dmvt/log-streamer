@@ -72,6 +72,10 @@ const tail = () => {
 
   proc.stdout.on('data', sendLine);
 
+  proc.stderr.on('data', (data) => {
+    process.stdout.write(`stderr: ${data}`);
+  });
+
   proc.on('close', () => {
     sendLine('\n\ntail exited... restarting in 5 seconds\n\n');
     history = [];

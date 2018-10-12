@@ -15,7 +15,7 @@
     "url": "git+https://github.com/arkoar-group/log-streamer.git"
   },
   "engines": {
-    "node": "^8.11.2"
+    "node": "^6.9.5"
   },
   "keywords": [],
   "author": "Dan Matthews <dmvt@pm.me>",
