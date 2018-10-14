@@ -8,8 +8,7 @@
       p { margin-bottom: 4px; }
       div { width:500px; margin-left:auto; margin-right:auto;}
       #content { padding:5px; background:#ddd; border-radius:5px;
-          overflow-y: scroll; border:1px solid #CCC;
-          margin-top:5px; height: 800px; width: 95%; }
+          border:1px solid #CCC; margin-top:5px; height: 100%; width: 95%; }
       #status { width:88px;display:block;float:left;margin-top:15px; }
     </style>
 
@@ -51,7 +50,7 @@
                 line = line.trim();
               }
               if (line.length > 0) {
-                $('#content').prepend('<p>' + line + '</p>');
+                $('#content').append('<p>' + line + '</p>');
               }
             });
           };
